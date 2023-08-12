@@ -18,16 +18,6 @@ class Api {
     this._headers.authorization = `Bearer ${token}`;
   }
 
-  _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return res.json()
-      .then(res => {
-        throw new Error(res.message);
-      });
-  }
-
   /**
    * Получает данные текущего пользователя
    * @returns {Promise} Промис с ответом сервера: объект текущего пользователя
@@ -36,10 +26,14 @@ class Api {
     const url = `${this._baseUrl}/users/me`;
 
     return fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: this._headers,
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -59,8 +53,12 @@ class Api {
         name,
         about,
       }),
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -77,8 +75,12 @@ class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -91,8 +93,12 @@ class Api {
     return fetch(url, {
       method: "GET",
       headers: this._headers,
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -112,8 +118,12 @@ class Api {
         name,
         link,
       }),
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -127,8 +137,12 @@ class Api {
     return fetch(url, {
       method: "DELETE",
       headers: this._headers,
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return Promise.resolve();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -142,8 +156,12 @@ class Api {
     return fetch(url, {
       method: "PUT",
       headers: this._headers,
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**
@@ -157,8 +175,12 @@ class Api {
     return fetch(url, {
       method: "DELETE",
       headers: this._headers,
-    })
-    .then(this._checkResponse);
+    }).then((res) => {
+      if (res.ok) return res.json();
+      return res.json().then((res) => {
+        throw new Error(res.message);
+      });
+    });
   }
 
   /**

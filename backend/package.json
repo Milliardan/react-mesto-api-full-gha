@@ -32,8 +32,12 @@
     "celebrate": "^15.0.1",
     "cors": "^2.8.5",
     "express": "^4.16.0",
+    "express-rate-limit": "^6.9.0",
+    "express-winston": "^4.2.0",
+    "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.4",
-    "validator": "^13.9.0"
+    "validator": "^13.9.0",
+    "winston": "^3.10.0"
   }
 }

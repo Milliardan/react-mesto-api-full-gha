@@ -35,6 +35,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   // Авторизация пользователя
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState("");
 
   const navigate = useNavigate();
 
@@ -150,7 +151,7 @@ function App() {
       auth
         .checkToken(token)
         .then((res) => {
-          // setCurrentUser(res);
+          setEmail(res.email);
           api.setToken(token);
           setIsLoggedIn(true);
           navigate("/");
@@ -184,7 +185,7 @@ function App() {
                   cards={cards}
                   onCardLike={handleCardLike}
                   onCardDelete={handleCardDelete}
-                  email={currentUser.email}
+                  email={email}
                   onLogout={handleLogout}
                 />
               </ProtectedRoute>
