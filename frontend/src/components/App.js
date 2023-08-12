@@ -18,32 +18,42 @@ import api from "../utils/api";
 import auth from "../utils/auth";
 
 function App() {
+  // Состояние попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  // Данные для обработки попапами
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [toBeDeletedCard, setToBeDeletedCard] = React.useState(null);
   const [infoMessage, setInfoMessage] = React.useState(null);
 
+  // Пользователь
   const [currentUser, setCurrentUser] = React.useState({});
+  // Карточки
   const [cards, setCards] = React.useState([]);
+  // Авторизация пользователя
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState("");
 
   const navigate = useNavigate();
 
+  /**
+   * Получение информации о пользователе и исходных карточек при открытии страницы
+   */
   React.useEffect(() => {
-    api.getUserInfo().then(setCurrentUser).catch(console.error);
+    if (isLoggedIn) {
+      api.getUserInfo().then(setCurrentUser).catch(console.error);
 
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(console.error);
-  }, []);
+      api
+        .getInitialCards()
+        .then((res) => {
+          setCards(res);
+        })
+        .catch(console.error);
+    }
+
+  }, [isLoggedIn]);
 
   // Функции открытия/закрытия попапов
   function handleEditAvatarClick() {
@@ -140,7 +150,7 @@ function App() {
       auth
         .checkToken(token)
         .then((res) => {
-          setEmail(res.data.email);
+          api.setToken(token);
           setIsLoggedIn(true);
           navigate("/");
         })
@@ -173,7 +183,7 @@ function App() {
                   cards={cards}
                   onCardLike={handleCardLike}
                   onCardDelete={handleCardDelete}
-                  email={email}
+                  email={currentUser.email}
                   onLogout={handleLogout}
                 />
               </ProtectedRoute>

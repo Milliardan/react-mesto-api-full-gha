@@ -1,7 +1,9 @@
+import { apiConfig } from './apiConfig';
+
 class Auth {
   /**
    * Отвечает за осуществление и обработку сетевых запросов, связанных с аутентификацией
-   * @param {string}
+   * @param {string} Базовый URL для обращения
    */
   constructor(baseUrl) {
     this._baseUrl = baseUrl;
@@ -31,7 +33,6 @@ class Auth {
    *    }
    * }
    */
-
   register({email, password}) {
     const url = `${this._baseUrl}/signup`;
     return fetch(url, {
@@ -54,10 +55,9 @@ class Auth {
    *
    * Формат ответа сервера:
    * {
-   *    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjUxNDhlNWJiODhmZGNhOTIxYjZhYzciLCJpYXQiOjE1OTkyMTExNzN9.Q3DVLh7t0f0BjyG9gh3UlUREYQxl2chdGTGy701lF6I"
+   *    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhxNDhlNWJiODhmZGNhOTIxYjZhYzciLCJpYXQiOjE1OTkyMTExNzN9.Q3DVLh7t0f0BjyG9gh3UlUREYQxl2chdGTGy701lF6I"
    * }
    */
-
   authorize({email, password}) {
     const url = `${this._baseUrl}/signin`;
     return fetch(url, {
@@ -74,7 +74,7 @@ class Auth {
   }
 
   /**
-   * Проверяет валидность токена
+   * Провеляет валидность токена
    * @param {object} Параметры пользователя {email, password}
    * @returns {Promise} Ответ сервера/ошибка
    *
@@ -100,6 +100,6 @@ class Auth {
   }
 }
 
-const auth = new Auth('https://auth.nomoreparties.co');
+const auth = new Auth(apiConfig.baseUrl);
 
 export default auth;

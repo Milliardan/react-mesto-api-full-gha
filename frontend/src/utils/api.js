@@ -14,6 +14,10 @@ class Api {
     this._headers = headers;
   }
 
+  setToken(token) {
+    this._headers.authorization = `Bearer ${token}`;
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
