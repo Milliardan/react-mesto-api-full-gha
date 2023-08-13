@@ -1,5 +1,5 @@
 export const apiConfig = {
-  baseUrl: `http://localhost:3001`,
+  baseUrl: `https://api.mesto.milliardan.nomoreparties.co`,
   headers: {
     "Content-Type": "application/json",
   },
