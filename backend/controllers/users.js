@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { User } = require('../models/user');
 const { ConflictError, ValidationError, NotFoundError, UnauthorizedError } = require('../errors');
@@ -26,7 +27,7 @@ async function createUser(req, res, next) {
     res.status(201).send(user);
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
-      next(new ValidationError(`Неверные данные в ${err.path ?? 'запросе'}`));
+      next(new ValidationError(`Неверные данные в ${err.path || 'запросе'}`));
       return;
     }
     if (err.code === 11000) {
@@ -59,7 +60,7 @@ async function getUser(req, res, next) {
     res.send(user);
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
-      next(new ValidationError(`Неверные данные в ${err.path ?? 'запросе'}`));
+      next(new ValidationError(`Неверные данные в ${err.path || 'запросе'}`));
       return;
     }
     next(err);
@@ -174,4 +175,5 @@ module.exports = {
   login,
   updateAvatar,
   updateUser,
+  updateUserField,
 };

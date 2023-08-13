@@ -11,7 +11,8 @@ async function createCard(req, res, next) {
     res.status(201).send(card);
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
-      next(new ValidationError(`Неверные данные в ${err.path ?? 'запросе'}`));
+      next(new ValidationError(`Неверные данные в ${err.path || 'запросе'}`));
+
       return;
     }
 
@@ -69,7 +70,7 @@ async function putLike(req, res, next) {
     res.send(card);
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
-      next(new ValidationError(`Неверные данные в ${err.path ?? 'запросе'}`));
+      next(new ValidationError(`Неверные данные в ${err.path || 'запросе'}`));
       return;
     }
     next(err);
@@ -92,7 +93,7 @@ async function deleteLike(req, res, next) {
     res.send(card);
   } catch (err) {
     if (err.name === 'CastError' || err.name === 'ValidationError') {
-      next(new ValidationError(`Неверные данные в ${err.path ?? 'запросе'}`));
+      next(new ValidationError(`Неверные данные в ${err.path || 'запросе'}`));
       return;
     }
     next(err);

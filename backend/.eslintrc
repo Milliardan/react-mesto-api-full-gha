@@ -3,6 +3,6 @@
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "object-curly-newline": ["error", { "multiline": "consistent" }]
+    "object-curly-newline": ["error", { "multiline": true, "consistent": true }]
   }
 }
