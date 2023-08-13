@@ -11,6 +11,6 @@
 
 IP-адрес 158.160.75.154
 
-Frontend https://...
+Frontend https://mesto.milliardan.nomoreparties.co
 
-Backend https://...
+Backend https://api.mesto.milliardan.nomoreparties.co
